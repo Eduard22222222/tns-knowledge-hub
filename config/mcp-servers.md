@@ -64,6 +64,22 @@ These are the local (stdio) MCP servers Eduard runs alongside Claude Code, sourc
 - **higgsfield** — Higgsfield AI video/image generation CLI wrapped as an MCP server (`pip install higgsfield-mcp` or equivalent). Auth is handled by the `higgsfield` CLI's own login flow (stores a token outside this file), not via env var here. See `memory/reference_higgsfield_cli_video.md`.
 - **playwright** — browser automation via `@playwright/mcp`. No credentials needed; requires `npx` (Node.js) available on PATH.
 
+## Not yet wired up
+
+- **Blender** (via the `ahujasid/blender-mcp` bridge) — lets Claude drive a running Blender scene directly (execute Python via `bpy`, inspect objects, render screenshots). Referenced in `memory/project_brand_3d_asset_pipeline.md` as intended for stands/outfits/product 3D work, but not yet connected on this machine. To wire it up: install the Blender add-on from that repo, start Blender with it enabled, then add the MCP server the same way as the others above.
+
+## Built into Claude Code Desktop (nothing to install)
+
+These aren't separately-configured MCP servers — they ship with the Claude Code Desktop app itself and just need the app installed/logged in:
+
+- **Browser pane** (`Claude_Browser`) — an in-app Chromium tab Claude can navigate/read/screenshot/click, used for previewing dev servers and browsing docs/staging sites.
+- **claude-in-chrome** — drives Eduard's *real* Chrome (existing logged-in sessions) via a paired browser extension, for tasks that need an already-authenticated site. Needs the Chrome extension installed and paired once per device.
+- **computer-use** — screenshot + mouse/keyboard control of the desktop itself, for native apps with no API/MCP of their own. Gated per-application by an explicit access grant the user approves.
+- **scheduled-tasks** — cron-style recurring agent runs (`/schedule`).
+- **mcp-registry** — lets Claude search/suggest other MCP connectors to add.
+- **terminal** — reads output from a terminal pane the user has open alongside the session.
+- Session/workspace management (`spawn_task`, `mark_chapter`, directory switching, session search/history) — internal to how Claude Code Desktop tracks the session itself.
+
 ## Also referenced elsewhere on this machine
 
 - `C:\Users\adumi\.claude\keys\` — a local folder Eduard keeps for miscellaneous tokens referenced by scripts/skills. Not included in this repo (it's a raw secrets store by design). If you're setting this up fresh, create your own equivalent and keep it out of git.
