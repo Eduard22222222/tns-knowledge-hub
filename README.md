@@ -2,7 +2,7 @@
 
 Portable snapshot of **The Niche Society**'s working knowledge — Obsidian vaults, Claude Code skills, and distilled project memory — bundled into one repo so a **new AI model instance** (Claude, GPT, whatever) can be handed this repo and immediately have full context on Eduard Dumitriu / TNS's projects, conventions, and tooling.
 
-> ⚠️ **This repo contains unredacted internal notes.** Client names, internal decisions, and possibly credentials/keys mentioned in passing inside notes have **not** been scrubbed. Keep this repo **private**. Never publish it, never paste its contents into a public tool, never share the link outside a trusted context.
+> ⚠️ **This repo is public, at Eduard's explicit request, and contains unredacted internal notes.** Client names and internal decisions inside `vaults/` and `memory/` have **not** been scrubbed — that was a deliberate choice, not an oversight. The one exception: two live Google AI Studio API keys found embedded in local MCP configs *were* redacted before push (see `config/mcp-servers.md`) — those never got committed. If you're not Eduard, treat everything here as his working notes, not as an invitation to use anything credential-shaped you might still find.
 
 ---
 
@@ -13,7 +13,7 @@ tns-knowledge-hub/
 ├── vaults/     # Full copies of every Obsidian vault (23 vaults)
 ├── skills/     # Full mirror of the Claude Code skills library (~1285 skills)
 ├── memory/     # Claude Code's distilled auto-memory (MEMORY.md index + per-topic files)
-├── config/     # Global CLAUDE.md (how Claude Code is instructed to behave/use tools)
+├── config/     # Global CLAUDE.md + MCP servers/connectors setup (mcp-servers.md, connectors.md)
 └── scripts/    # sync.ps1 — re-pull the latest copies from the live sources
 ```
 
@@ -30,7 +30,8 @@ If you're an AI model instance being handed this repo cold, read things in this 
 3. [`vaults/Obsidian Vault/CLAUDE.md`](<vaults/Obsidian Vault/CLAUDE.md>) — **the authority** on how notes are structured (Zettelkasten method), how to create new notes, linking rules, naming conventions. Follow this exactly when adding anything to `vaults/Obsidian Vault/`.
 4. [`memory/MEMORY.md`](memory/MEMORY.md) — the index of distilled, current project/user/feedback memory. Each line links to a file with more detail. This is the fastest way to understand "what's going on right now" across all TNS projects.
 5. `config/CLAUDE.md` — how the human (Eduard) has configured Claude Code to behave globally (tool preferences, KotaDB usage, etc.). Useful context on working style even if you're not literally Claude Code.
-6. Whichever `vaults/<Client> Vault/` is relevant to the task at hand — each client/project has its own vault (see map below).
+6. [`config/mcp-servers.md`](config/mcp-servers.md) and [`config/connectors.md`](config/connectors.md) — what tools/integrations are wired up (local MCP servers + hosted claude.ai connectors) and how to set up your own. **API keys in these files are placeholders** — the originals had two live keys embedded, redacted before this repo went public.
+7. Whichever `vaults/<Client> Vault/` is relevant to the task at hand — each client/project has its own vault (see map below).
 
 ## Vault map
 
