@@ -1,0 +1,12 @@
+﻿project: "FamilyLink"
+human: "Eduard"
+team_folder: "_Agent Team"
+vault_path: "C:\Users\adumi\OneDrive\Documents\FamilyLink Vault"
+agents:
+  - id: human
+    inbox: "_Agent Team/inbox/human"
+  - id: claude
+    inbox: "_Agent Team/inbox/claude"
+  - id: codex
+    inbox: "_Agent Team/inbox/codex"
+created: "2026-05-04"

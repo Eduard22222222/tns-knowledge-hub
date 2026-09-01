@@ -1,0 +1,27 @@
+---
+name: project-postiz-selfhost
+description: Self-hosted Postiz (social scheduler) running in WSL2 Ubuntu Docker at localhost:5000 — full 7-service stack incl. Temporal
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 4545310d-4b10-48f9-9b72-45984fa9ac6a
+  modified: 2026-07-28T16:38:36.529Z
+---
+
+Postiz self-hosted rulează în **WSL2 Ubuntu** (nu Docker Desktop), config la `/root/postiz/docker-compose.yml`, UI pe **http://localhost:5000**. Instalat 2026-07-25 după o depanare lungă.
+
+**Stack = 7 servicii** (nu 3!): postiz + postiz-postgres + postiz-redis + **temporal + temporal-postgresql + temporal-elasticsearch + temporal-ui**. Postiz `latest` (Next.js 16) a adăugat un proces `orchestrator` care **cere Temporal pe :7233** — compose-ul vechi cu 3 servicii intră în crash-loop infinit (`ConnectionRefused 7233` → dărâmă tot → oscilează HTTP 200/502 → `ChunkLoadError` în browser). Compose-ul oficial curent: `github.com/gitroomhq/postiz-docker-compose` (necesită și `dynamicconfig/development-sql.yaml` pt Temporal, plus `TEMPORAL_ADDRESS: temporal:7233` în env).
+
+Pornire: `wsl -d Ubuntu -u root -- bash -c 'service docker start; cd /root/postiz && docker compose up -d'`. Boot complet ~90s (Elasticsearch → Temporal → Postiz). Porturi interne container: 5000 proxy nginx, 4200 frontend, 3000 backend, 3002 orchestrator health.
+
+Vezi [[skill-wsl2-docker-gotchas]] pentru capcanele de infrastructură (idle-shutdown WSL, quoting, EADDRINUSE) descoperite aici.
+
+**Conturi sociale.** Cheile API NU sunt în compose by default — fiecare rețea cere app de developer proprie. Redirect URI = `MAIN_URL/integrations/social/<retea>`. Secretele stau în `/root/postiz/.env` (chmod 600), referite din compose ca `${VAR}`.
+- **YouTube: configurat 2026-07-25.** Google Cloud project **"Postiz Social"** (`smart-bridge-503511-u7`), YouTube Data API v3 enabled, OAuth client "Postiz YouTube", consent screen External în **Testing** cu edumitriu04@gmail.com ca test user. ⚠️ În Testing, refresh tokens **expiră la 7 zile** → de publicat în Production ca să nu reconectezi săptămânal (atunci apare warning "Google hasn't verified this app" → Advanced → Go to Postiz). Google **nu mai lasă să vezi client secret-ul** după creare — dacă se pierde, generezi altul din Clients.
+- **TikTok: configurat 2026-07-28 în SANDBOX.** App "Postiz Scheduler" `7667568424003930120`, sandbox "Postiz Sandbox" `7667595386470959112`, client key `sbaw66xna3bd4dh3x4` (prefix `sb` = sandbox), secret în `.env`. Login Kit + Content Posting API, scopes `user.info.basic`+`video.upload`, redirect `https://postiz.thenichesociety.ro/integrations/social/tiktok`. ⚠️ **Formularul TikTok e „totul sau nimic"** — nu salvează NIMIC (nici măcar redirect URI) până nu completezi icon 1024×1024 + categorie + descriere + ToS URL + Privacy URL + Website URL; Production cere în plus **video demo** + explicaţie 1000 caractere. Upload-ul iconiţei prin `file_upload` e respins (acceptă doar fişiere partajate de user) → generează canvas 1024×1024 în pagină cu JS şi setează inputul via `DataTransfer` + eveniment `change`. Sandbox-ul funcţionează DOAR pentru "Target Users" adăugaţi manual (cere login TikTok = pasul userului).
+- **Meta/Facebook**: extensia Chrome NU are permisiune pe `developers.facebook.com` → userul trebuie s-o acorde din iconiţa extensiei înainte ca automatizarea să poată atinge pagina. Env vars aşteptate de Postiz: `FACEBOOK_APP_ID/SECRET`, `INSTAGRAM_APP_ID/SECRET`, `THREADS_APP_ID/SECRET`.
+- **TikTok + Instagram: BLOCATE pe localhost** — ambele cer redirect URI **HTTPS** (localhost http respins). Google/YouTube e excepția care acceptă `http://localhost`.
+- ⛔ **Tunelul `trycloudflare.com` NU e o soluție** (verificat 2026-07-28). Postiz derivă domeniul cookie-ului cu `tldts.parse(FRONTEND_URL)` în `getCookieUrlFromDomain`; pentru `xxx.trycloudflare.com` versiunea de tldts din imagine returnează `domain=trycloudflare.com` → cookie pe `.trycloudflare.com`, pe care **Chrome îl respinge** (e pe Public Suffix List). Simptom: login-ul reuşeşte pe server (400 doar la parolă greşită) dar te întoarce la Sign In la nesfârşit. **Deci TikTok/Instagram cer un domeniu REAL** (ex. `postiz.domeniu.ro` → cookie `.domeniu.ro` ✅), nu un tunel quick. Diagnostic rapid: `docker exec postiz node -e "const{parse}=require('tldts');const p=parse(process.env.FRONTEND_URL);console.log(p.domain?'.'+p.domain:p.hostname)"`.
+- ✅ **SOLUŢIA HTTPS (funcţională 2026-07-28), gratuită şi fără expunere publică:** record A `postiz.thenichesociety.ro → 127.0.0.1` în Netlify DNS (zone id `69a18596e3373d00b7a7a61d`; **CLI-ul `netlify api createDnsRecord` dă 422 — foloseşte REST direct** cu tokenul din `%APPDATA%\netlify\Config\config.json`) + cert Let's Encrypt prin **acme.sh `--dns dns_netlify`** (token în `/root/.secrets/netlify.tok`, reînnoire automată prin cron) + container **nginx `postiz-proxy`** pe 443/80 în compose care termină TLS şi dă proxy la `postiz:5000`. Merge fiindcă redirect-ul OAuth îl face **browserul local**, deci hostname-ul poate rezolva la loopback. Restul zonei DNS (MX Google, SPF/DKIM/DMARC, apex/www/skills) rămâne neatins.
+- **Reset parolă** (bcrypt cost 10, `AuthService.hashPassword`): generează hash în containerul postiz cu `require('bcrypt').hashSync(pw,10)`, scrie-l prin fişier SQL (`psql -v` NU interpolează cu `-c`), apoi verifică cu `compareSync` înainte de a declara reuşita.
+- Postarea automată publică cere audit/app review la toate trei (TikTok direct-post, Meta content publish + cont Business, YouTube upload public).

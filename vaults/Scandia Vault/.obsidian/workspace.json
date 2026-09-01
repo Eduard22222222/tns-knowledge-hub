@@ -1,0 +1,14 @@
+{
+  "main": {
+    "id": "scandia-root",
+    "type": "split",
+    "children": [
+      {
+        "id": "scandia-leaf",
+        "type": "leaf",
+        "state": { "type": "markdown", "state": { "file": "Welcome.md", "mode": "source" } }
+      }
+    ],
+    "direction": "vertical"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "main": {
+    "id": "bonduelle-root",
+    "type": "split",
+    "children": [
+      {
+        "id": "bonduelle-leaf",
+        "type": "leaf",
+        "state": { "type": "markdown", "state": { "file": "Welcome.md", "mode": "source" } }
+      }
+    ],
+    "direction": "vertical"
+  }
+}

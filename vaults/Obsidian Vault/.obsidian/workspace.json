@@ -1,0 +1,222 @@
+{
+  "main": {
+    "id": "1f7f70eecf241159",
+    "type": "split",
+    "children": [
+      {
+        "id": "b47446ad829ed1d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b0ed155beda543a6",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a8a6af76da12c570",
+    "type": "split",
+    "children": [
+      {
+        "id": "a48e111eaedb9a12",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3a1ed76f401124e8",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "b88ff02dbaa8f559",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ddc6463956043108",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcaje"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "7e98c840ade88268",
+    "type": "split",
+    "children": [
+      {
+        "id": "3ef18cb7383a4f04",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "88f1dd7c066cd3ac",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Bine ați venit.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Referințe pentru Bine ați venit"
+            }
+          },
+          {
+            "id": "adca1bb444be4355",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Bine ați venit.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Legături de ieșire din Bine ați venit"
+            }
+          },
+          {
+            "id": "c5adc281778a265a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etichete"
+            }
+          },
+          {
+            "id": "a50e4ec836214e23",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Toate proprietățile"
+            }
+          },
+          {
+            "id": "4e929fef1f138654",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Bine ați venit.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumar Bine ați venit"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "b0ed155beda543a6",
+  "lastOpenFiles": [
+    "Knowledge/FamilyLink Trust Assets.md",
+    "Projects/Duman Herăstrău.md",
+    "Projects/Carduri NFC Google Review.md",
+    "Skills/Blender/polyhaven-studio-setup.md",
+    "Skills/Claude Dynamic Workflows.md",
+    "Skills/Claude Dynamic Workflows.md.tmp.21548.75d386e17060",
+    "Skills/Blender/Blender Skills.md",
+    "Skills/Blender/image-to-3d.md",
+    "Skills - Security.md",
+    "Projects/Caroli Brand Showcase.md",
+    "Projects/Business Plans & Consulting MOC.md",
+    "Skills/Claude Skills Index.md",
+    "Dashboard.md.tmp.19872.0606c8e8226d",
+    "Projects/Creatives MOC.md.tmp.19872.fa080849b2cd",
+    "Projects/Creatives - GoaMasaj.md",
+    "Projects/Creatives - GoaMasaj.md.tmp.19872.36d75a51373e",
+    "Projects/GoaMasaj Academy.md",
+    "Projects/GoaMasaj Academy.md.tmp.19872.d88b425763c1",
+    "Projects/TNS Lead Gen System.md.tmp.92808.520a977adfbc",
+    "Projects/TNS Lead Gen System.md.tmp.92808.ff49e0ada712",
+    "Projects/TNS Lead Gen System.md.tmp.92808.e8aa7e46e376",
+    "Projects/TNS Lead Gen System.md.tmp.92808.057c899ed38e",
+    "Projects/Consumer Voice Platform (Wave x TNS).md.tmp.94560.d3359a2e69f2",
+    "Projects/Consumer Voice Platform (Wave x TNS).md",
+    "Templates/New Project Template.md",
+    "Knowledge/FamilyLink Caregiver Assignment Strategy.md",
+    "Knowledge/FamilyLink Magic Link Flow.md",
+    "Projects/Projects MOC.md",
+    "Projects/Tetr 48h Hackathon.md",
+    "Projects/GoaMasaj Google Ads.md",
+    "Projects/Nordic Food Brand Showcase.md",
+    "Projects/Cris-Tim Brand Showcase.md",
+    "Projects/FamilyLink Negotiation Notes 2026-04-30.md",
+    "Projects/FamilyLink Faza 1 MVP.md",
+    "Knowledge/FamilyLink Design System v1.md",
+    "Knowledge/FamilyLink Voice and Tone.md"
+  ]
+}
